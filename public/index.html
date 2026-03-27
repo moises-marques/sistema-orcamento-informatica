@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Orçamento - TechMaster</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2a5298">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- CABEÇALHO COM DADOS DA LOJA -->
+        <header class="loja-header">
+            <!-- <h1>🖥️ TechMaster Informática</h1> -->
+            <h1>Gerador de Nota Fiscal</h1>
+            <!-- <div class="loja-dados">
+                <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                <p>📍 Av. da Tecnologia, 1500 - Centro, São Paulo - SP</p>
+                <p>📞 (11) 3333-4444 | ✉️ contato@techmaster.com.br</p>
+            </div> -->
+        </header>
+
+        <h2>Sistema de Orçamento</h2>
+
+        <!-- FORMULÁRIO DO CLIENTE -->
+        <section class="secao">
+            <h3>📋 Dados do Cliente</h3>
+            <div class="form-grid">
+                <div class="campo">
+                    <label>Nome Completo:</label>
+                    <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+                </div>
+                <div class="campo">
+                    <label>CPF/CNPJ:</label>
+                    <input type="text" id="clienteDocumento" placeholder="Ex: 123.456.789-00">
+                </div>
+                <div class="campo">
+                    <label>Telefone:</label>
+                    <input type="text" id="clienteTelefone" placeholder="Ex: (11) 98765-4321">
+                </div>
+                <div class="campo">
+                    <label>E-mail:</label>
+                    <input type="email" id="clienteEmail" placeholder="Ex: joao@email.com">
+                </div>
+                <div class="campo full-width">
+                    <label>Endereço:</label>
+                    <input type="text" id="clienteEndereco" placeholder="Ex: Rua das Flores, 123 - Bairro">
+                </div>
+            </div>
+        </section>
+
+        <!-- ADICIONAR ITENS -->
+        <section class="secao">
+            <h3>🛒 Itens do Orçamento</h3>
+
+            <div class="adicionar-item">
+                <input type="text" id="itemDescricao" placeholder="Descrição do produto/serviço">
+                <input type="number" id="itemQuantidade" placeholder="Qtd" min="1" value="1">
+                <input type="number" id="itemPreco" placeholder="Preço Unitário (R$)" step="0.01" min="0">
+                <button onclick="adicionarItem()" class="btn-adicionar">➕ Adicionar</button>
+            </div>
+
+            <!-- LISTA DE ITENS -->
+            <table id="tabelaItens">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Descrição</th>
+                        <th>Qtd</th>
+                        <th>Unitário</th>
+                        <th>Total</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaItens">
+                    <!-- Itens serão inseridos aqui via JavaScript -->
+                </tbody>
+                <tfoot>
+                    <tr class="subtotal-row">
+                        <td colspan="4">Subtotal:</td>
+                        <td colspan="2" id="subtotal">R$ 0,00</td>
+                    </tr>
+                    <tr class="desconto-row">
+                        <td colspan="4">
+                            Desconto:
+                            <select id="tipoDesconto" onchange="atualizarTabela()">
+                                <option value="0">Sem desconto</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                            </select>
+                        </td>
+                        <td colspan="2" id="valorDesconto">R$ 0,00</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="4"><strong>TOTAL COM DESCONTO:</strong></td>
+                        <td colspan="2"><strong id="totalGeral">R$ 0,00</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- OBSERVAÇÕES -->
+        <section class="secao">
+            <h3>📝 Observações</h3>
+            <textarea id="observacoes" rows="3"
+                placeholder="Informações adicionais, prazo de entrega, condições de pagamento..."></textarea>
+        </section>
+
+        <!-- BOTÕES -->
+        <div class="botoes">
+            <button onclick="limparOrcamento()" class="btn-limpar">🗑️ Limpar</button>
+            <button onclick="gerarOrcamento()" class="btn-gerar">📄 Gerar PDF do Orçamento</button>
+        </div>
+
+        <!-- MENSAGEM DE STATUS -->
+        <div id="mensagem" class="mensagem"></div>
+
+        <!-- SEÇÃO DE ORÇAMENTOS SALVOS -->
+        <section class="secao orcamentos-salvos" style="background: #2a5298; color: white;">
+            <h3 style="color: white; text-align: center; font-size: 1.5em;">💾 GERENCIAR ORÇAMENTOS</h3>
+
+            <div class="botoes-salvos" style="justify-content: center; margin: 20px 0;">
+                <button onclick="salvarOrcamento()" class="btn-salvar" style="font-size: 1.1em; padding: 15px 25px;">
+                    💾 SALVAR ORÇAMENTO ATUAL
+                </button>
+                <button onclick="carregarOrcamentos()" class="btn-listar" style="font-size: 1.1em; padding: 15px 25px;">
+                    📋 MOSTRAR ORÇAMENTOS SALVOS
+                </button>
+            </div>
+
+            <!-- ÁREA DA LISTA - AGORA BEM VISÍVEL -->
+            <div id="listaOrcamentosSalvos" style="
+                background: white; 
+                color: #333; 
+                border-radius: 10px; 
+                padding: 20px; 
+                min-height: 100px;
+                max-height: 400px;
+                overflow-y: auto;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            ">
+                <div style="text-align: center; color: #666; padding: 30px; font-style: italic;">
+                    Clique em "MOSTRAR ORÇAMENTOS SALVOS" para ver a lista aqui 👇
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

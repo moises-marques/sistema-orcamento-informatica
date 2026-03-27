@@ -1,0 +1,559 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* CABEÇALHO DA LOJA */
+.loja-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.loja-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.loja-dados {
+    font-size: 0.95em;
+    opacity: 0.95;
+}
+
+.loja-dados p {
+    margin: 5px 0;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    background: #f8f9fa;
+    border-bottom: 3px solid #2a5298;
+}
+
+/* SEÇÕES */
+.secao {
+    padding: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.secao h3 {
+    color: #2a5298;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+/* FORMULÁRIO DO CLIENTE */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.campo.full-width {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #2a5298;
+}
+
+/* ADICIONAR ITENS */
+.adicionar-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.adicionar-item input {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+#itemDescricao {
+    flex: 2;
+    min-width: 200px;
+}
+
+#itemQuantidade {
+    flex: 0.5;
+    min-width: 80px;
+}
+
+#itemPreco {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* BOTÕES */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-adicionar {
+    background: #28a745;
+    color: white;
+}
+
+.btn-adicionar:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-limpar {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-limpar:hover {
+    background: #c82333;
+}
+
+.btn-gerar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.1em;
+    padding: 15px 40px;
+}
+
+.btn-gerar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background: #2a5298;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.total-row {
+    background: #e3f2fd !important;
+    font-size: 1.2em;
+    color: #2a5298;
+}
+
+.btn-remover {
+    background: #ff6b6b;
+    color: white;
+    padding: 5px 15px;
+    font-size: 0.85em;
+}
+
+.btn-remover:hover {
+    background: #fa5252;
+}
+
+/* TEXTAREA */
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #2a5298;
+}
+
+/* BOTÕES FINAIS */
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    background: #f8f9fa;
+}
+
+/* MENSAGEM */
+.mensagem {
+    padding: 15px;
+    margin: 0 25px 25px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.mensagem.sucesso {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.mensagem.erro {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .adicionar-item {
+        flex-direction: column;
+    }
+    
+    .botoes {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    button {
+        width: 100%;
+    }
+
+    /* ➕ ADICIONAR AQUI: Centralizar tabela no responsivo */
+    #tabelaItens {
+        font-size: 0.85em;
+    }
+    
+    #tabelaItens th,
+    #tabelaItens td {
+        padding: 8px 5px;
+        text-align: center !important;
+    }
+    
+    /* Ajustar colunas específicas */
+    #tabelaItens th:nth-child(1),
+    #tabelaItens td:nth-child(1) {
+        width: 10%;
+    }
+    
+    #tabelaItens th:nth-child(2),
+    #tabelaItens td:nth-child(2) {
+        width: 40%;
+        text-align: left !important;
+    }
+    
+    #tabelaItens th:nth-child(3),
+    #tabelaItens td:nth-child(3) {
+        width: 10%;
+    }
+    
+    #tabelaItens th:nth-child(4),
+    #tabelaItens td:nth-child(4),
+    #tabelaItens th:nth-child(5),
+    #tabelaItens td:nth-child(5) {
+        width: 15%;
+    }
+    
+    #tabelaItens th:nth-child(6),
+    #tabelaItens td:nth-child(6) {
+        width: 10%;
+    }
+    
+    /* Centralizar o tfoot (totais) */
+    #tabelaItens tfoot td {
+        text-align: center !important;
+    }
+    
+    #tabelaItens tfoot td[colspan="4"] {
+        text-align: right !important;
+        padding-right: 10px;
+    }
+    
+    /* Ajustar o select de desconto */
+    .desconto-row select {
+        font-size: 0.9em;
+        padding: 3px;
+    }
+    
+    /* Permitir scroll horizontal na tabela se necessário */
+    .secao {
+        overflow-x: auto;
+    }
+    
+    #tabelaItens {
+        min-width: 100%;
+    }
+
+}  /* ← FIM DO MEDIA QUERY */
+
+                       /* No final tfoot subtotal-row */
+
+/* Estilos para desconto */
+.subtotal-row {
+    background: #f8f9fa !important;
+    font-weight: 600;
+    color: #555;
+    
+}
+
+.desconto-row {
+    background: #fff3cd !important;
+    font-weight: 600;
+    color: #856404;
+}
+
+.desconto-row select {
+    padding: 5px 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.desconto-row select:focus {
+    border-color: #2a5298;
+    outline: none;
+}
+
+                    /* ➕ ESTILOS PARA ORÇAMENTOS SALVOS */
+
+.orcamentos-salvos {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.botoes-salvos {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-salvar {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-salvar:hover {
+    background: #138496;
+}
+
+.btn-listar {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-listar:hover {
+    background: #545b62;
+}
+
+.lista-salvos {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.orcamento-card {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.orcamento-card:hover {
+    border-color: #2a5298;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.orcamento-info h4 {
+    color: #2a5298;
+    margin-bottom: 5px;
+}
+
+.orcamento-info p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0;
+}
+
+.orcamento-acoes {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-carregar {
+    background: #28a745;
+    color: white;
+    padding: 8px 15px;
+    font-size: 0.85em;
+}
+
+.btn-carregar:hover {
+    background: #218838;
+}
+
+.btn-pdf-salvo {
+    background: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    font-size: 0.85em;
+}
+
+.sem-orcamentos {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* ➕ ADICIONAR NO FINAL DO style.css */
+
+/* Cards de orçamento melhorados */
+.orcamento-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.orcamento-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.orcamento-info h4 {
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.orcamento-info p {
+    color: rgba(255,255,255,0.9);
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.orcamento-acoes button {
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-carregar {
+    background: #00d9ff !important;
+    color: #333 !important;
+}
+
+.btn-carregar:hover {
+    background: #00b8d4 !important;
+    transform: scale(1.05);
+}
+
+.btn-pdf-salvo {
+    background: #ff4757 !important;
+}
+
+.btn-pdf-salvo:hover {
+    background: #ff3344 !important;
+    transform: scale(1.05);
+}
+
+                             /* Botão excluir orçamento */
+
+/* Botão de excluir orçamento */
+.btn-excluir {
+    background: #ff4757 !important;
+    color: white !important;
+    padding: 8px 15px;
+    font-size: 0.85em;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.btn-excluir:hover {
+    background: #ff3344 !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+}
+
+/* Efeito de fade out ao excluir */
+.orcamento-card {
+    transition: all 0.3s ease;
+}
+
+.orcamento-card.excluindo {
+    opacity: 0;
+    transform: translateX(-100%);
+}
